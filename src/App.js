@@ -31,7 +31,7 @@ function App() {
         <h1>Tarefas</h1>
       </div>
       <div className="form-todo">
-        <p>Insira sua próxima tarefa</p>
+        <h2>Insira a sua próxima tarefa:</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-control">
             <label htmlFor="title">Qual sua tarefa?</label>
