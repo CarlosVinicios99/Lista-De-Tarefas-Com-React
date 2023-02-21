@@ -11,6 +11,22 @@ function App() {
   const [todos, setTodos] = useState([])
   const [loading, setLoading] = useState(false)
 
+  useEffect(() => {
+    const loadData = async() => {
+
+      setLoading(true)
+      const res = await fetch(API + "/tarefas")
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => console.log(err))
+      
+      setLoading(false)
+      setTodos(res)
+
+    }
+
+    loadData()
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -30,8 +46,14 @@ function App() {
       } 
     })
 
+    setTodos(prevState => [...prevState, todo])
+
     setTitle("")
     setTime("")
+  }
+
+  if(loading){
+    return <p>Carregando...</p>
   }
 
   return (
@@ -64,6 +86,11 @@ function App() {
       <div className="list-todo">
         <h2>Lista De Tarefas:</h2>
         {todos.length === 0 && <p>Nao há tarefas!</p>} 
+        {todos.map((todo) => {
+          <div className='todo' key={todo.id}>
+            <p>{todo.title}</p>
+          </div>
+        })}
       </div>
     </div>
   )
