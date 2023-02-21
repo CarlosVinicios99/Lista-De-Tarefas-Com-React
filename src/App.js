@@ -17,7 +17,7 @@ function App() {
       setLoading(true)
       const res = await fetch(API + "/tarefas")
         .then(res => res.json())
-        .then(data => data)
+        .then((data) => data)
         .catch(err => console.log(err))
       
       setLoading(false)
@@ -42,8 +42,8 @@ function App() {
       method: "POST",
       body: JSON.stringify(todo),
       headers: {
-        "Content-Type": "application/json"
-      } 
+        "Content-Type": "application/json",
+      },
     })
 
     setTodos(prevState => [...prevState, todo])
@@ -86,11 +86,18 @@ function App() {
       <div className="list-todo">
         <h2>Lista De Tarefas:</h2>
         {todos.length === 0 && <p>Nao há tarefas!</p>} 
-        {todos.map((todo) => {
+        {todos.map((todo) => (
           <div className='todo' key={todo.id}>
-            <p>{todo.title}</p>
+            <h3 className={todo.done ? "todo-done" : ""}>{todo.title}</h3>
+            <p>Duracao: {todo.time}</p>
+            <div className="actions">
+              <span>
+                {!todo.done ? <BsBookmarkCheck/> : <BsBookmarkCheckFill/>}
+              </span>
+              <BsTrash/>
+            </div>
           </div>
-        })}
+        ))}
       </div>
     </div>
   )
