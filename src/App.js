@@ -96,7 +96,7 @@ function App() {
         {todos.map((todo) => (
           <div className='todo' key={todo.id}>
             <h3 className={todo.done ? "todo-done" : ""}>{todo.title}</h3>
-            <p>Duracao: {todo.time}</p>
+            <p>Duracao: {todo.time}h</p>
             <div className="actions">
               <span>
                 {!todo.done ? <BsBookmarkCheck/> : <BsBookmarkCheckFill/>}
